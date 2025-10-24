@@ -106,7 +106,7 @@ export const insertTransactionSchema = createInsertSchema(transactions).omit({
   createdAt: true,
   updatedAt: true,
 }).extend({
-  amount: z.number().positive("Amount must be positive"),
+  amount: z.union([z.string(), z.number()]).transform(val => typeof val === 'number' ? val.toString() : val),
 });
 
 export const depositSchema = z.object({

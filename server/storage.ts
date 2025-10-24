@@ -208,7 +208,7 @@ export class DatabaseStorage implements IStorage {
       // Create pending transaction
       const transaction = await this.createTransaction({
         walletId,
-        amount: amount.toString(),
+        amount: amount.toFixed(2),
         type: 'deposit',
         paymentMode,
         status: 'pending',
@@ -269,7 +269,7 @@ export class DatabaseStorage implements IStorage {
         // Create outgoing transaction
         const outTransaction = await this.createTransaction({
           walletId: fromWalletId,
-          amount: amount.toString(),
+          amount: amount.toFixed(2),
           type: 'transfer_out',
           paymentMode: 'WalletBalance',
           status: 'pending',
@@ -290,7 +290,7 @@ export class DatabaseStorage implements IStorage {
           // Create incoming transaction for recipient
           await this.createTransaction({
             walletId: toWalletId,
-            amount: amount.toString(),
+            amount: amount.toFixed(2),
             type: 'transfer_in',
             paymentMode: 'WalletBalance',
             status: 'success',
